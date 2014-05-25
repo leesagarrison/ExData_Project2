@@ -9,10 +9,11 @@ NEI<-readRDS("summarySCC_PM25.rds")
 
 ##Plot6
 ##retrieve and sum all entries for Baltimore and LA Country for motor vehicles
+library(quantmod)  ##needed for delt function
 VehicleSubsetMD<-subset(NEI, fips == "24510" & type == "ON-ROAD")
 VehicleSubsetLA<-subset(NEI, fips == "06037" & type == "ON-ROAD")
-VehicleAggregateMD <- aggregate(VehicleSubsetMD$Emissions, list(VehicleSubsetMD$fips, VehicleSubset1$year), sum)
-VehicleAggregateLA <- aggregate(VehicleSubsetLA$Emissions, list(VehicleSubsetLA$fips, VehicleSubset2$year), sum)
+VehicleAggregateMD <- aggregate(VehicleSubsetMD$Emissions, list(VehicleSubsetMD$fips, VehicleSubsetMD$year), sum)
+VehicleAggregateLA <- aggregate(VehicleSubsetLA$Emissions, list(VehicleSubsetLA$fips, VehicleSubsetLA$year), sum)
 ##set column names to make it easier to work with the data
 vehicleAggregrateNames<-c("City", "Year", "TotalEmissions")
 colnames(VehicleAggregateMD)<-vehicleAggregrateNames
